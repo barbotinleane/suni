@@ -11,46 +11,42 @@ final class IndexController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(): Response
     {
-        $response = new Response('
-        <h1>Le restaurant Suni</h1>
-        <img style="height:600px;" src="https://www.tables-auberges.com/storage/images/front/medias/549/549-le-relais-des-moines-1.jpg" alt="Random Image">');
+        return $this->render('accueil/index.html.twig');
+    }
 
-        return $response;
+    #[Route('/last-blog-post', name: 'app_last_blog_post')]
+    public function lastBlogPost(): Response
+    {
+        $lastBlogPost = [
+            'title' => 'Nouveau dessert à la carte !',
+            'content' => 'Découvrez notre version signature de la tarte au citron meringuée.',
+            'date' => (new \DateTime())->format('Y-m-d H:i:s'),
+        ];
+        
+        return $this->render('partials/_last_blog_post.html.twig', [
+            'lastBlogPost' => $lastBlogPost,
+        ]);
     }
 
     #[Route('/reservations', name: 'app_reservations')]
     public function reservations(): Response
     {
-        $response = new Response('
-        <h1>Reservations</h1>
-        <img style="height:600px;" src="https://cdn.venngage.com/template/thumbnail/small/c50525da-3d68-4d0b-9b3a-cb389d95535a.webp" alt="Random Image">');
-
-        return $response;
+        return $this->render('reservations/index.html.twig');
     }
 
     #[Route('/blog', name: 'app_blog')]
     public function blog(): Response
     {
-        $response = new Response('
-        <h1>Blog</h1>
-        <img style="height:600px;" src="https://www.formationfacile.com/wp-content/uploads/2021/04/comment-creer-un-blog-01-1-4.png" alt="Random Image">');
-
-        return $response;
+        return $this->render('blog/index.html.twig');
     }
 
     #[Route('/blog/article/{post}', name: 'app_blog_post', requirements: ['post' => '^[a-z-]+$'])]
     public function blogPost(string $post = "not-found"): Response
     {
         if($post == "not-found") {
-            $response = new Response('
-            <h1>Article introuvable</h1>
-            <img style="height:600px;" src="https://thumbs.dreamstime.com/b/animation-d-icône-de-couleur-page-web-introuvable-animée-signe-isolé-sur-fond-blanc-207675518.jpg" alt="Random Image">');
+            return $this->render('blog/not_found.html.twig');
         } else {
-            $response = new Response('
-            <h1>Post de notre blog</h1>
-            <img style="height:600px;" src="https://www.lapotence.fr/images/contenus/categories/7-potence-plat-1.jpg" alt="Random Image">');
+            return $this->render('blog/post.html.twig');
         }
-
-        return $response;
     }
 }

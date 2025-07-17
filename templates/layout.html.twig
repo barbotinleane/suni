@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <header>
+        {% include "partials/_menu.html.twig" %}
+    </header>
+
+    <div class="main-container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>Restaurant Suni</p>
+        <p>1 rue de la paix, Marseille</p>
+    </footer>
+{% endblock %}

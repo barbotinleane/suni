@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+<div>
+    <h1>Le restaurant Suni</h1>
+    <img style="height:600px;" src="https://www.tables-auberges.com/storage/images/front/medias/549/549-le-relais-des-moines-1.jpg" alt="Random Image">
+
+    {{ render(controller('App\\Controller\\IndexController::lastBlogPost')) }}
+</div>
+
+{% endblock %}
