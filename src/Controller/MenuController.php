@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\PageTracker;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -10,11 +11,15 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 final class MenuController extends AbstractController
 {
     #[Route('/menu', name: 'app_menu')]
-    public function index(): Response
+    public function index(PageTracker $tracker): Response
     {
         if ((new \DateTime())->format('m-d') === '02-14') {
             return $this->redirectToRoute('app_menu_saint_valentin');
         }
+
+        $tracker->track('menu');
+        $stats = $tracker->getStats();
+        $menu = $stats['menu'] ?? ['count' => 0, 'last_visit' => 'jamais'];
 
         $menuItems = [
             [
@@ -40,6 +45,7 @@ final class MenuController extends AbstractController
         return $this->render('menu/index.html.twig', [
             'menu_items' => $menuItems,
             'date' => (new \DateTime()),
+            'menu_stats' => $menu,
         ]);
     }
 

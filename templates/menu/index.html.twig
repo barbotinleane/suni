@@ -26,7 +26,14 @@
     {% endfor %}
     </div>
 
-    <a href="{{ path('app_index') }}">Retour à la page d'accueil</a>
+    <div class="text-center m-5">
+        <a href="{{ path('app_index') }}">Retour à la page d'accueil</a>
+    </div>
+
+    <div class="p-5 m-5 text-end">
+        <p>Vues : {{ menu_stats.count }}</p>
+        <p>Dernière visite : {{ menu_stats.last_visit|format_datetime(pattern='d MMMM y à HH:mm', locale='fr') }}</p>
+    </div>
 
 </div>
 
