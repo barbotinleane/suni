@@ -28,12 +28,6 @@ final class IndexController extends AbstractController
         ]);
     }
 
-    #[Route('/reservations', name: 'app_reservations')]
-    public function reservations(): Response
-    {
-        return $this->render('reservations/index.html.twig');
-    }
-
     #[Route('/blog', name: 'app_blog')]
     public function blog(): Response
     {

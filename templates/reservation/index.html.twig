@@ -1,0 +1,31 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Réserver une table{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Réserver une table</h1>
+
+    {{ form_start(form, { method: 'get' }) }}
+
+        <div class="mb-3">
+            {{ form_label(form.name, 'Nom', { label_attr: { class: 'form-label' } }) }}
+            {{ form_widget(form.name, { attr: { class: 'form-control' } }) }}
+            {{ form_errors(form.name) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.email, 'Email', { label_attr: { class: 'form-label' } }) }}
+            {{ form_widget(form.email, { attr: { class: 'form-control' } }) }}
+            {{ form_errors(form.email) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.message, 'Message', { label_attr: { class: 'form-label' } }) }}
+            {{ form_widget(form.message, { attr: { class: 'form-control', rows: 4 } }) }}
+            {{ form_errors(form.message) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Réserver</button>
+
+    {{ form_end(form) }}
+{% endblock %}
